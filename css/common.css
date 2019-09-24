@@ -1,0 +1,715 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+html,
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+div,
+ul,
+li,
+dl,
+dt,
+dd,
+img,
+header,
+footer,
+nav,
+section,
+article,
+span,
+a,
+em,
+strong,
+b,
+label,
+input,
+pre,
+textarea {
+    margin: 0;
+    padding: 0;
+}
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    background-color: transparent;
+    color: inherit;
+}
+
+/* 移除ios Android 上input type=number 时候的小箭头 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0; 
+}
+/* firefox */
+input[type="number"] {
+    -moz-appearance:textfield;
+}
+/*取消a标签在移动端点击时的背景色*/
+a{
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+
+
+
+/* start === 兼容 IE11*/
+    p {
+        max-width: 100%;
+    }
+    :before,
+    :after {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-box;
+        -webkit-box-orient: horizontal;
+        -moz-box-orient: horizontal;
+        -ms-box-orient: horizontal;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        -ms-box-align: center;
+        -webkit-box-pack: center;
+        -moz-box-pack: center;
+        -ms-box-pack: center;
+        /* 新版 flex*/
+        /* 设置伸缩容器 */
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        /* 设置主轴对齐 */
+        -webkit-justify-content: center;
+        justify-content: center;
+        /* 设置侧轴对齐 */
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    input,
+    textarea,
+    select {
+        background-color: transparent;
+    }
+
+
+/* end ==========*/
+li {
+    list-style: none;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font-family: 微软雅黑, arial, sans-serif;
+    /*font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", sans-serif;*/
+    /*background-color: #eaeaea;*/
+    /*background-color: #fff;*/
+    color: #666;
+    background-color: #fff;
+    font-size: 14px;
+    line-height:100%;
+
+}
+@media screen and (max-width:320px) {
+    html {
+        font-size: 10px !important;
+    }
+}
+@media screen and (min-width: 321px) and (max-width:375px) {
+    html {
+        font-size: 12px !important;
+    }
+}
+@media screen and (min-width: 376px) and (max-width:425px) {
+    html {
+        font-size: 14px !important;
+    }
+}
+@media screen and (min-width: 426px) and (max-width:480px) {
+    html {
+        font-size: 18px !important;
+    }
+}
+@media screen and (min-width: 481px) {
+    html {
+        font-size: 20px !important;
+    }
+} 
+
+
+.flexbox {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: -o-box;
+    display: box;
+
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+
+
+
+/*蒙版*/
+
+.mask {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+b {
+    font-weight: 500;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+/*a:active {
+    color: #F98307;
+    text-decoration: none;
+}*/
+
+img {
+    border: none;
+    vertical-align: top;
+
+}
+
+
+.hide {
+    display: none;
+}
+.hidden {
+    visibility: hidden;
+}
+
+.show {
+    display: block;
+}
+
+a:focus {
+    outline: none;
+}
+
+.l {
+    float: left;
+    display: inline;
+}
+
+.r {
+    float: right;
+    display: inline;
+}
+
+.indent {
+    text-indent: -9999px;
+}
+
+.clear {
+    zoom: 1;
+}
+
+.clear:before,
+.clear:after {
+    content: "";
+    display: table;
+    width: 0;
+    height: 0;
+    line-height: 0;
+}
+
+.clear:after {
+    clear: both;
+}
+
+.container {
+    min-width: 320px;
+    max-width: 640px;
+    
+}
+
+
+
+.pointer {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+.box-justify {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -ms-box-orient: horizontal;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-box-pack: justify;
+    /* 新版 flex*/
+    /* 设置伸缩容器 */
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    /* 设置主轴对齐 */
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    /* 设置侧轴对齐 */
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+
+.box-center {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -ms-box-orient: horizontal;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-box-pack: center;
+    /* 新版 flex*/
+    /* 设置伸缩容器 */
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    /* 设置主轴对齐 */
+    -webkit-justify-content: center;
+    justify-content: center;
+    /* 设置侧轴对齐 */
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.box-start {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -ms-box-orient: horizontal;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -ms-box-pack: start;
+    /* 新版 flex*/
+    /* 设置伸缩容器 */
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    /* 设置主轴对齐 */
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    /* 设置侧轴对齐 */
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.box-end {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -ms-box-orient: horizontal;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -ms-box-pack: end;
+    /* 新版 flex*/
+    /* 设置伸缩容器 */
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    /* 设置主轴对齐 */
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    /* 设置侧轴对齐 */
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.box-distribute {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.box-v-start {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -ms-box-pack: start;
+    /* 新版 flex*/
+    /* 设置伸缩容器 */
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    /* 设置主轴方向为 从上到下*/
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    /* 设置主轴对齐 */
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    /* 设置侧轴对齐 */
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.box-v-center {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-box-pack: center;
+    /* 新版 flex*/
+    /* 设置伸缩容器 */
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    /* 设置主轴方向为 从上到下*/
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    /* 设置主轴对齐 */
+    -webkit-justify-content: center;
+    justify-content: center;
+    /* 设置侧轴对齐 */
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.box-v-end {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -ms-box-pack: end;
+    /* 新版 flex*/
+    /* 设置伸缩容器 */
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    /* 设置主轴方向为 从上到下*/
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    /* 设置主轴对齐 */
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    /* 设置侧轴对齐 */
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.box-v-justify {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-box-pack: justify;
+    /* 新版 flex*/
+    /* 设置伸缩容器 */
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    /* 设置主轴方向为 从上到下*/
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    /* 设置主轴对齐 */
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    /* 设置侧轴对齐 */
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.box-v-distribute {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    /* 设置主轴方向为 从上到下*/
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+
+/*设置伸缩盒 子项目 start 对齐*/
+
+.align-start {
+    /* 设置侧轴对齐 */
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-box-align: start;
+    box-align: start;
+    /* 新版flex */
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+
+
+/*设置伸缩盒 子项目 end 对齐*/
+
+.align-end {
+    /* 设置侧轴对齐 */
+    -webkit-box-align: end;
+    -moz-box-align: end;
+    -ms-box-align: end;
+    box-align: end;
+    /* 新版flex */
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+}
+
+
+/*设置伸缩盒 子项目 stretch 对齐*/
+
+.align-stretch {
+    /* 设置侧轴对齐 */
+    -webkit-box-align: stretch;
+    -moz-box-align: stretch;
+    -ms-box-align: stretch;
+    box-align: stretch;
+    /* 新版flex */
+    -webkit-align-items: stretch;
+    align-items: stretch;
+}
+
+
+/*设置单个伸缩项目自身 start 对齐*/
+
+.self-start {
+    -ms-align-self: flex-start;
+    align-self: flex-start;
+}
+
+
+/*设置单个伸缩项目自身 center 对齐*/
+
+.self-center {
+    -ms-align-self: center;
+    align-self: center;
+}
+
+
+/*设置单个伸缩项目自身 end 对齐*/
+
+.self-end {
+    -ms-align-self: flex-end;
+    align-self: flex-end;
+}
+
+
+/*设置单个伸缩项目自身 stretch 对齐*/
+
+.self-stretch {
+    -ms-align-self: stretch;
+    align-self: stretch;
+}
+
+
+/**设置单个伸缩项目自身 自适应长度(尽量伸长)
+ * 前提是别的伸缩项目的 flex 为 0 (即不显式设置)
+ */
+
+.rest {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    -o-flex: 1;
+    flex: 1;
+
+    /*overflow: auto;*/
+}
+
+
+/**
+ * 深灰 #333;(默认)
+ * 中灰 #666;
+ * 浅灰 #aaa;
+ */
+
+.gray-dark {
+    color: #000;
+}
+
+.gray-medium {
+    color: #afb7bb;
+}
+
+.gray-light {
+    color: #aaa !important;
+}
+
+
+
+
+/**
+ * 单行内容超出部分显示省略号
+ * 这一行 display 必须为 block
+ */
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/*投影*/
+
+.shadow {
+    -webkit-box-shadow: 0 2px 5px #ccc;
+    box-shadow: 0 2px 5px #ccc;
+}
+
+
+/**
+ * 大字体 28px
+ * 中字体 24px (默认)
+ * 小字体 20px
+ */
+
+.size-large {
+    font-size: 16px;
+}
+
+.size-medium {
+    font-size: 14px;
+}
+
+.size-small {
+    font-size: 12px;
+}
+
+/*文字对齐*/
+.text-center {
+    text-align:center;
+}
+/*背景色*/
+.bg-white{
+    background-color:#fff;
+}
