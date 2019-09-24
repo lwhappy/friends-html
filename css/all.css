@@ -19,3 +19,21 @@ html,body{
 .light-gray{
     color:#afb7bb;
 }
+body{
+	color:#666;
+}
+p{
+	line-height:24px;
+}
+.word span{
+	margin-left:5px;
+}
+em{
+	font-style:normal;
+}
+.right input{
+	color:blue;
+}
+.clear-input{
+	margin:0 5px;
+}

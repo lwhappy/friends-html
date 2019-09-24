@@ -1,27 +1,40 @@
-function getRequest(method) {
-    var handle = function(data){
-        if(method && method === "encodeURIComponent") {
-            return decodeURIComponent(data);
-        } else {
-            return unescape(data);
-        }
-    };
-
-    var rel = window.location.href;
-    var index = rel.indexOf("?");
-
-    var url = rel.substring(index); //获取url中"?"符后的字串
-    var theRequest = {};
-    if (url.indexOf("?") != -1) {
-        var str = url.substr(1);
-        strs = str.split("&");
-        for (var i = 0; i < strs.length; i++) {
-            var arr = strs[i].split("=");
-            theRequest[arr[0]] = handle(arr[1]);
-        }
+$("body em").each(function(){
+    var value = $(this).text()
+    value = $.trim(value)
+    $(this).attr("word",value)
+    $(this).addClass("target")
+    var newValue = value.split('')
+    newValue.sort(function(a,b){
+        return Math.random()-0.5;
+    });
+    var text = ''
+    for(var i = 0; i < newValue.length; i++) {
+        text += ('<span class="letter">' + newValue[i] + '</span>')
     }
-    return theRequest;
-}
+    var _html = '<input class="input" readonly="true" type="text" /><div class="word" style="display:inline;">[(' + text + ')<p class="clear-input" style="display:inline;">clear</p><p class="answer" style="display:inline;">answer</p>]</div>'
+    $(this).html(_html)
+})
+
+$(".word .letter").on("click",function(){
+    var value = $(this).parent().siblings("input").val()
+    value = value + $(this).text()
+    $(this).parent().siblings("input").val(value)
+    var word = $(this).parents('.target').attr('word')
+    if(value === word){
+        $(this).parents('.target').addClass("right")
+    } else {
+        $(this).parents('.target').removeClass("right")
+    }
+})
+$(".answer").on("click",function(){
+    var word = $(this).parents('.target').attr('word')
+    $(this).parent().siblings("input").val(word)
+    $(this).parents('.target').addClass("right")
+})
+$(".clear").on("click",function(){
+    $(this).parents(".target").find("input").val('')
+    $(this).parents('.target').removeClass("right")
+})
 
 
 

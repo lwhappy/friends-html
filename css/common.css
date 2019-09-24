@@ -63,34 +63,7 @@ a{
     p {
         max-width: 100%;
     }
-    :before,
-    :after {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-box;
-        -webkit-box-orient: horizontal;
-        -moz-box-orient: horizontal;
-        -ms-box-orient: horizontal;
-        -webkit-box-align: center;
-        -moz-box-align: center;
-        -ms-box-align: center;
-        -webkit-box-pack: center;
-        -moz-box-pack: center;
-        -ms-box-pack: center;
-        /* 新版 flex*/
-        /* 设置伸缩容器 */
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flex;
-        display: -o-flex;
-        display: flex;
-        /* 设置主轴对齐 */
-        -webkit-justify-content: center;
-        justify-content: center;
-        /* 设置侧轴对齐 */
-        -webkit-align-items: center;
-        align-items: center;
-    }
+    
     input,
     textarea,
     select {
