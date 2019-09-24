@@ -20,20 +20,51 @@ html,body{
     color:#afb7bb;
 }
 body{
-	color:#666;
+	color:#333;
 }
 p{
 	line-height:24px;
 }
+.word{
+	overflow:hidden;
+	margin-right:5px;
+}
 .word span{
-	margin-left:5px;
+	margin-left: 5px;
+	display: inline-block;
+	border: solid 1px #e5e5e5;
+	line-height: 20px;
+	height: 20px;
+	padding: 3px 5px;
+	margin-top:5px;
+	margin-bottom:5px;
 }
 em{
 	font-style:normal;
 }
-.right input{
+.right .input-value{
 	color:blue;
 }
 .clear-input{
 	margin:0 5px;
+}
+.target{
+	font-size:16px;
+	overflow:hidden;
+}
+.target *{
+	cursor:pointer;
+}
+.input{
+	background:none;
+	height:24px;
+	line-height:24px;
+	margin-right:5px;
+	margin-left:5px;
+	padding:0 5px;
+	font-size:16px;
+	margin-top:5px;
+	width:50px;
+}
+.word{
 }
