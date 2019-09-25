@@ -24,8 +24,8 @@ $("body em").each(function(){
 
 $(".word .letter").on("click",function(e){
     //$(this).parents(".target").find(".input .empty").addClass("hide")
-    e.stopPropagation()
-    e.preventDefault()
+    //e.stopPropagation()
+    //e.preventDefault()
     var value = $(this).parents(".target").find(".input-value").text()
     var letter = $(this).text()
     if(letter === '空格'){
@@ -61,6 +61,16 @@ $(".clear-input").on("click",function(){
     }
     $(this).parents(".target").find(".input-value").text(text)
     $(this).parents('.target').removeClass("right")
+})
+$(".chinese-button-show").on("click",function(){
+    $(".chinese").show()
+    $(this).hide()
+    $(".chinese-button-hide").show()
+})
+$(".chinese-button-hide").on("click",function(){
+    $(".chinese").hide()
+    $(this).hide()
+    $(".chinese-button-show").show()
 })
 
 
