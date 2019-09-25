@@ -22,31 +22,46 @@ html,body{
 body{
 	color:#333;
 }
-p{
-	line-height:24px;
+.main{
+	padding:0 5px;
 }
+p{
+	line-height:20px;
+	margin:10px 0;
+}
+*{
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+-webkit-user-select: none;
+-moz-user-focus: none;
+-moz-user-select: none;
+}
+
 .word{
 	overflow:hidden;
 	margin-right:5px;
 }
-.word span{
-	margin-left: 5px;
+.word .letter{
 	display: inline-block;
 	border: solid 1px #e5e5e5;
-	line-height: 20px;
-	height: 20px;
-	padding: 3px 5px;
-	margin-top:5px;
-	margin-bottom:5px;
+	line-height: 16px;
+	height: 16px;
+	padding: 3px 8px;
+	margin:3px 6px;
+	border-radius:5px;
+
 }
 em{
 	font-style:normal;
+}
+b{
+	font-weight:600;
 }
 .right .input-value{
 	color:blue;
 }
 .clear-input{
-	margin:0 5px;
+	margin:0 8px 0 8px;
+	font-size:12px;
 }
 .target{
 	font-size:16px;
@@ -67,4 +82,8 @@ em{
 	width:50px;
 }
 .word{
+	color:#666;
+}
+.answer{
+	font-size:12px;
 }
