@@ -13,29 +13,47 @@
     <meta http-equiv="Pragma" content="no-cache">
     <script>
         var t = "20171115";
-        document.write('<link href="../../css/common.css?v='+t+'" rel="stylesheet">');
+        document.write('<link href="./css/common.css?v='+t+'" rel="stylesheet">');
     </script>
     <style>
       h3{
         font-size:18px;
         line-height:30px;
+        color:#333;
+        font-weight:800;
+      }
+      a{
+        color:#333;
+      }
+      .index{
+        padding:10px;
       }
       ul li{
-        margin:10px 0;
+        margin:10px 20px;
         list-style:none;
+        float:left;
+        font-size:16px;
       }
     </style>
   </head>
   <body>
-    <div>
+    <div class="index">
       <h3>第一季</h3>
       <ul>
         <li>
+          <a href="text/1/101.html">第1集</a>
+        </li>
+        <li>
           <a href="text/1/102.html">第2集</a>
+        </li>
+         <li>
+          <a href="text/1/103.html">第3集</a>
         </li>
       </ul>
     </div>
-    <script src="../../js/jquery-3.1.1.min.js"></script>
-
+    <script src="./js/jquery-3.1.1.min.js"></script>
+    <script>
+        document.write('<script type="text/javascript" src="./js/global.js?v='+t+'" ></scr' + 'ipt>');
+    </script>
   </body>
 </html>
