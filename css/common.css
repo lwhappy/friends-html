@@ -650,8 +650,13 @@ a:focus {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
-
+.ellipsis-two {
+    display: -webkit-box;
+    -webkit-line-clamp:2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
 /*投影*/
 
 .shadow {
@@ -685,4 +690,65 @@ a:focus {
 /*背景色*/
 .bg-white{
     background-color:#fff;
+}
+@keyframes animate-keyframes {
+   0% {
+       transform:rotate(0);
+   }
+   50%{
+       transform:rotate(180deg);
+   }
+   100% {
+       transform:rotate(360deg);
+   }
+}
+@-moz-keyframes animate-keyframes {
+   0% {
+       transform:rotate(0);
+   }
+   50%{
+       transform:rotate(180deg);
+   }
+   100% {
+       transform:rotate(360deg);
+   }
+}
+@-webkit-keyframes animate-keyframes {
+   0% {
+       transform:rotate(0);
+   }
+   50%{
+       transform:rotate(180deg);
+   }
+   100% {
+       transform:rotate(360deg);
+   }
+}
+@-o-keyframes animate-keyframes {
+   0% {
+       transform:rotate(0);
+   }
+   50%{
+       transform:rotate(180deg);
+   }
+   100% {
+       transform:rotate(360deg);
+   }
+}
+
+
+#loading {
+    position: fixed;
+    left: 50%;
+    margin-left:-18px;
+    top: 0;
+    margin-top:-18px;
+    z-index: 10;
+    background: url(../images/loading.png) center center no-repeat;
+    width: 36px;
+    /*height: 36px;*/
+    animation: animate-keyframes 1s linear 0.2s infinite normal;
+    -moz-animation: animate-keyframes 1s linear 0.2s infinite normal;
+    -webkit-animation: animate-keyframes 1s linear 0.2s infinite normal;
+    -o-animation: animate-keyframes 1s linear 0.2s infinite normal;
 }

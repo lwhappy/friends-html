@@ -21,6 +21,7 @@
         margin:0 auto;
         word-break:break-all;
         color:#666;
+        font-size:16px;
       }
       html,body,.page,#list{
         height:100%;
@@ -37,15 +38,24 @@
           animation-fill-mode: both;
           width:200px;
       }
-      .item{
-        line-height:30px;
+      .sentence-list{
+        padding:0 5px;
+      }
+      .sentence .num{
+        width:20px;
+      }
+      .sentence .item{
+        float:left;
+        width:90%;
       }
       .word-wrapper,.sentence-wrapper{
         width:100%;
-        height:50%;
+        height:45%;
+        overflow-y:auto;
+        overflow-x:hidden;
       }
       .word-wrapper{
-        border-top:solid 1px #e5e5e5;
+        border-top:solid 1px #918989;
       }
       .wrap{
         flex-wrap: wrap;
@@ -56,16 +66,23 @@
       .match-word{
         color:#f56c6c;
       }
+      .sentence-list{
+        padding-top:5px;
+      }
       .sentence{
-        width:40%;
+        width:50%;
         float:left;
+        height:40px;
+        line-height:20px;
+        overflow:hidden;
+        margin:5px 0;
       }
       .word{
         float:left;
         background-color: #ecf5ff;
-            padding: 0 10px;
+            padding: 0;
             line-height: 30px;
-            font-size: 12px;
+            font-size: 14px;
             color: #409eff;
             border: 1px solid #d9ecff;
             border-radius: 4px;
@@ -73,15 +90,17 @@
             white-space: nowrap;
             margin:10px;
       }
-      .word .item,.sentence{
+      .word .item{
         padding:5px 10px;
       }
       .sentence-num-wrapper{
         margin:5px 0;
-        color:#999;
+        color:#b1adad;
+        font-size:14px;
       }
       .num{
         color:#999;
+        float:left;
       }
       #vid1 .page{
         background-color:rgba(0,0,0,0.7);
@@ -99,6 +118,27 @@
       #vid1 .page .match-word{
         color:#409eff;
       }
+      .wrong{
+        position:absolute;
+        width:100%;
+        height:30px;
+        line-height:30px;
+        background-color: rgb(217, 176, 138,0.8);
+        color: #ce3a0c;
+        z-index:1000;
+        text-align:center;
+      }
+      .hidden{
+        visibility: hidden;
+      }
+      html body #vid1 .vjs-fullscreen-control{
+        display:none!important;
+      }
+      @media screen and (min-width: 0) and (max-width:600px) {
+          .sentence{
+            width:100%;
+          }
+      }
     </style>
     <script>
         var t = "20001";
@@ -115,12 +155,13 @@
       preload="auto"
       width="640"
       height="264"
-      poster="http://vjs.zencdn.net/v/oceans.png">
-      <source src="video/1/S01E01.mp4" type="video/mp4">
+      poster="">
+      <source id="source" src="" type="video/mp4">
 
       <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
     </video-js>
     <div class="page hide">
+      <div class="wrong hide">wrong</div>
       <div id="list"></div>
       <!--<div class="next">next</div>-->
     </div>
@@ -138,20 +179,21 @@
               {{
                 var num = index + 1;
                 var matchWord = value.word.matchWord || value.word.english;
-                var hide = 'hide';
+                var hidden = 'hidden';
                 
               }}
               
-              <div class="sentence {{=hide}}">
+              <div class="sentence {{=hidden}}">
                 <span class="num">{{=num}}.</span>
-                <span class="item" english="{{=value.word.english}}" matchWord="{{=matchWord}}">
+                <span class="item ellipsis-two" english="{{=value.word.english}}" matchWord="{{=matchWord}}">
                   {{=value.sentence}}
                 </span>
               </div>
           {{~}}
         </div>
-        <div class="box-center sentence-num-wrapper"><span class="sentence-num">1</span>/<span>{{=it.resortRows.length}}</span></div>
+        
       </div>
+      <div class="box-center sentence-num-wrapper"><span class="sentence-num">1</span>/<span>{{=it.resortRows.length}}</span></div>
       <div class="word-wrapper">
         {{~it.rows:value:index}}
             {{
@@ -169,11 +211,25 @@
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/doT.min.js"></script>
     <script src="js/video.min.js"></script>
-    <script src="learn/1/1.js"></script>
+    <script src="js/common.js"></script>
     <script>
+      var theRequest = getRequest()
+      console.log(theRequest)
+      var a = theRequest['a']
+      var b = theRequest['b']
+      document.write('<script type="text/javascript" src="js/learn/'+a+'/'+b+'.js?v='+t+'" ></scr' + 'ipt>');
+
+    </script>
+
+    <script>
+
       var isNext = true
-      var part = 0
-      build(data.part[part])
+      var partIndex = 0
+      $('#source').attr('src',data.src)
+      var startTime = data.part[partIndex].startTime
+      startTime = startTime.split(":")
+      startTime = Number(startTime[0])*60 + Number(startTime[1])
+      build(data.part[partIndex])
       /*$.ajax({
           url:"learn/1/1.json",    //请求的url地址
           dataType:"text",   //返回格式为json
@@ -239,8 +295,8 @@
           $('.sentence-wrapper').addClass('magic slideRightReturn')
           isNext = true
         })*/
-        $('.sentence-wrapper .sentence:first').removeClass('hide').addClass('active')
-        $('#list').addClass('magic slideRightReturn')
+        $('.sentence-wrapper .sentence:first').removeClass('hidden').addClass('active')
+        
         wordClick()
       }
       function wordClick(){
@@ -249,6 +305,7 @@
             return false
           }
           var $active = $('.sentence-wrapper .sentence.active')
+          console.log('index',$active.index())
           var activeEnglish = $active.find('.item').attr('english')
           var thisEnglish = $(this).attr('english')
           if(activeEnglish === thisEnglish){
@@ -263,7 +320,10 @@
 
             if($active.next().length){
               setTimeout(function(){
-                $active.next().removeClass('hide')
+                if(($active.index()+1)%4===0){
+                  $(".sentence-wrapper").scrollTop(100)
+                }
+                $active.next().removeClass('hidden')
                 .addClass("active magic slideRightReturn")
                 $active.removeClass('active')
                 //$active.parents('.sentence-wrapper').addClass('magic slideRightReturn')
@@ -278,16 +338,31 @@
             } else{
               //alert('good')
               setTimeout(function(){
-                $('.page').addClass('hide')
-                part ++
-                if(part < data.part.length){
-                  build(data.part[part])
-                }
-                
-                videoPlayer.play()
+                $('#list').removeClass('slideRightReturn').addClass('slideLeft')
               },1000)
               
+              setTimeout(function(){
+                $('.page').addClass('hide')
+
+                partIndex ++
+                if(partIndex < data.part.length){
+                  startTime = data.part[partIndex].startTime
+                  startTime = startTime.split(":")
+                  startTime = Number(startTime[0])*60 + Number(startTime[1])
+                  if(partIndex < data.part.length){
+                    build(data.part[partIndex])
+                  }
+                }
+                $('video').removeClass('hide')
+                videoPlayer.play()
+              },2000)
+              
             }
+          } else {
+            $('.wrong').fadeIn(300)
+            setTimeout(function(){
+              $('.wrong').fadeOut(300)
+            },2000)
           }
         })
       }
@@ -298,47 +373,58 @@
       <script>
     var question = 1    
     var vid = document.getElementById('vid1');
-    var videoPlayer = videojs(vid);
+    var videoPlayer = videojs(vid,{
+      //isFullscreen: true,
+      width:$(window).width(),
+      height:$(window).height()
+    });
     videoPlayer.ready(function() {
         $('.vjs-control-bar').before($('.page'))
+        $('.vjs-fullscreen-control').remove()
       });
 
    videoPlayer.on('play',function(){
-    console.log(9)
+    this.requestFullScreen();
    }) 
    var isMousedown = false;
    var oldTime=0,newTime=0,maxTime=0;
-   var isDrag = false
+   var isDrag = true
    if(!isDrag) {
-   var isMousedown = false;
-   videoPlayer.on('pause', function() {
-   if(isMousedown == false) {
-   　oldTime = videoPlayer.currentTime();
+      var isMousedown = false;
+      videoPlayer.on('pause', function() {
+        if(isMousedown == false) {
+        　oldTime = videoPlayer.currentTime();
+        }
+      });
+      videoPlayer.on('play', function() {
+        isMousedown = false;
+        newTime = videoPlayer.currentTime();
+        if(newTime < maxTime) {
+          videoPlayer.currentTime(newTime);
+        } else {
+          videoPlayer.currentTime(oldTime);
+        };
+      });
+      $(".vjs-progress-holder").mousedown(function() {
+       isMousedown = true;
+       oldTime = videoPlayer.getCache().currentTime;
+      });
+   
    }
-   });
-   videoPlayer.on('play', function() {
-   isMousedown = false;
-   newTime = videoPlayer.currentTime();
-   if(newTime < maxTime) {
-   videoPlayer.currentTime(newTime);
-   } else {
-   videoPlayer.currentTime(oldTime);
-   };
-   });
-   $(".vjs-progress-holder").mousedown(function() {
-    isMousedown = true;
-    oldTime = videoPlayer.getCache().currentTime;
-   });
    videoPlayer.on('timeupdate', function() {
-    if(videoPlayer.currentTime() > maxTime && !isMousedown) {
-      maxTime = videoPlayer.currentTime();
+    if(isDrag){
+      if(videoPlayer.currentTime() > maxTime && !isMousedown) {
+        maxTime = videoPlayer.currentTime();
+      }
     }
-    if(videoPlayer.currentTime() >= data.part[part].time && videoPlayer.currentTime() <= (data.part[part].time+1) && $('.page').hasClass('hide')){
+    //console.log(videoPlayer.currentTime(),startTime)
+    if(partIndex < data.part.length && videoPlayer.currentTime() >= startTime && videoPlayer.currentTime() <= (startTime+2) && $('.page').hasClass('hide')){
       $('.page').removeClass('hide')
+      $('video').addClass('hide')
+      $('#list').addClass('magic slideRightReturn').removeClass('slideLeft')
       videoPlayer.pause()
     }
    });
-   }
   </script>
   </body>
 </html>
