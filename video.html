@@ -213,6 +213,7 @@
     <script src="js/video.min.js"></script>
     <script src="js/common.js"></script>
     <script>
+      var lastTime = 0
       var theRequest = getRequest()
       console.log(theRequest)
       var a = theRequest['a']
@@ -355,6 +356,10 @@
                 }
                 $('video').removeClass('hide')
                 videoPlayer.play()
+                isShow = false
+                lastTime = new Date().getTime()/1000
+                //videoPlayer.requestFullScreen();
+                
               },2000)
               
             }
@@ -371,6 +376,7 @@
         //document.write('<script type="text/javascript" src="../../js/learn.js?v='+t+'" ></scr' + 'ipt>');
     </script>
       <script>
+    var isShow = false
     var question = 1    
     var vid = document.getElementById('vid1');
     var videoPlayer = videojs(vid,{
@@ -380,49 +386,98 @@
     });
     videoPlayer.ready(function() {
         $('.vjs-control-bar').before($('.page'))
-        $('.vjs-fullscreen-control').remove()
+       // $('.vjs-fullscreen-control').remove()
       });
 
-   videoPlayer.on('play',function(){
-    this.requestFullScreen();
-   }) 
+   
+   videoPlayer.on('pause', function() {
+     //alert(1)
+   });
    var isMousedown = false;
-   var oldTime=0,newTime=0,maxTime=0;
-   var isDrag = true
-   if(!isDrag) {
-      var isMousedown = false;
-      videoPlayer.on('pause', function() {
-        if(isMousedown == false) {
-        　oldTime = videoPlayer.currentTime();
-        }
-      });
-      videoPlayer.on('play', function() {
-        isMousedown = false;
-        newTime = videoPlayer.currentTime();
-        if(newTime < maxTime) {
-          videoPlayer.currentTime(newTime);
-        } else {
-          videoPlayer.currentTime(oldTime);
-        };
-      });
-      $(".vjs-progress-holder").mousedown(function() {
+   var oldTime=0
+   var newTime=0
+   var maxTime=0
+   var prevTime=0
+   var prevTimeArr = []
+   var isDrag = false
+   var isMousedown = false;
+   /*videoPlayer.on('pause', function() {
+     if(!isDrag && isMousedown == false) {
+     　oldTime = videoPlayer.currentTime();
+     }
+   });*/
+   videoPlayer.on('play', function() {//点击进度条会触发play
+     if(isShow){
+       videoPlayer.pause()
+       /*vivo浏览器弹出框后视频转圈圈，返回后会提示视频链接失效*/
+       //alert('请先做题（若全屏模式下看不到题目请按返回键）')
+     } 
+     /*if(!isDrag){
+       
+       if(isMousedown){
+          newTime = videoPlayer.currentTime();
+          console.log('newTime', newTime)
+          console.log('maxTime', maxTime)
+          console.log('oldTime', oldTime)
+          if(newTime < oldTime) {
+           //debugger
+            videoPlayer.currentTime(newTime);
+          } else {
+            videoPlayer.currentTime(oldTime);
+          }
+          isMousedown = false
+       }
+       
+     }*/
+     
+   });
+   /*移动端video层级太高，会把进度条遮盖掉*/
+   /*$(".vjs-progress-holder,.vjs-progress-control").mousedown(function() {
+     if(!isDrag){
        isMousedown = true;
        oldTime = videoPlayer.getCache().currentTime;
-      });
-   
-   }
+       console.log('oldTime', oldTime)
+     }
+    
+   });*/
    videoPlayer.on('timeupdate', function() {
-    if(isDrag){
-      if(videoPlayer.currentTime() > maxTime && !isMousedown) {
-        maxTime = videoPlayer.currentTime();
+    if(!isDrag){
+      console.log('videoPlayer.currentTime()',videoPlayer.currentTime(),'maxTime',maxTime,'prevTime',prevTime)
+      if(videoPlayer.currentTime() > maxTime && (videoPlayer.currentTime() - prevTime > 2)) {
+        //debugger
+        console.log('set')
+        videoPlayer.currentTime(prevTime)//uc浏览器失效，不能阻止快进
+      }
+      prevTime = videoPlayer.currentTime()
+      if(prevTime > maxTime){
+        maxTime = prevTime
       }
     }
     //console.log(videoPlayer.currentTime(),startTime)
-    if(partIndex < data.part.length && videoPlayer.currentTime() >= startTime && videoPlayer.currentTime() <= (startTime+2) && $('.page').hasClass('hide')){
+    
+    for(var i = 0;i < data.part.length;i++){
+      var time = data.part[i].startTime
+      time = time.split(":")
+      time = Number(time[0])*60 + Number(time[1])
+      var currentTime = new Date().getTime()/1000
+      if(videoPlayer.currentTime() >= time && videoPlayer.currentTime() <= (time+2) && (currentTime-lastTime) > 5){//距离上一次播放至少5秒
+        isShow = true
+        partIndex = i
+        startTime = time
+      }
+    }
+    if(partIndex < data.part.length && isShow && $('.page').hasClass('hide')){
+      //debugger
       $('.page').removeClass('hide')
       $('video').addClass('hide')
+      videoPlayer.exitFullscreen()
+      
+      if(partIndex < data.part.length){
+        build(data.part[partIndex])
+      }
       $('#list').addClass('magic slideRightReturn').removeClass('slideLeft')
       videoPlayer.pause()
+
     }
    });
   </script>
