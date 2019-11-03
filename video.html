@@ -132,7 +132,7 @@
         visibility: hidden;
       }
       html body #vid1 .vjs-fullscreen-control{
-        display:none!important;
+        /*display:none!important;*/
       }
       @media screen and (min-width: 0) and (max-width:600px) {
           .sentence{
@@ -408,7 +408,7 @@
    });*/
    videoPlayer.on('play', function() {//点击进度条会触发play
      if(isShow){
-       videoPlayer.pause()
+       //videoPlayer.pause()
        /*vivo浏览器弹出框后视频转圈圈，返回后会提示视频链接失效*/
        //alert('请先做题（若全屏模式下看不到题目请按返回键）')
      } 
@@ -442,10 +442,10 @@
    });*/
    videoPlayer.on('timeupdate', function() {
     if(!isDrag){
-      console.log('videoPlayer.currentTime()',videoPlayer.currentTime(),'maxTime',maxTime,'prevTime',prevTime)
+      //console.log('videoPlayer.currentTime()',videoPlayer.currentTime(),'maxTime',maxTime,'prevTime',prevTime)
       if(videoPlayer.currentTime() > maxTime && (videoPlayer.currentTime() - prevTime > 2)) {
         //debugger
-        console.log('set')
+        //console.log('set')
         videoPlayer.currentTime(prevTime)//uc浏览器失效，不能阻止快进
       }
       prevTime = videoPlayer.currentTime()
@@ -470,7 +470,7 @@
       //debugger
       $('.page').removeClass('hide')
       $('video').addClass('hide')
-      videoPlayer.exitFullscreen()
+      //videoPlayer.exitFullscreen()
       
       if(partIndex < data.part.length){
         build(data.part[partIndex])
