@@ -26,6 +26,9 @@ body{
 .main{
 	padding:0 5px;
 }
+.light{
+	color:blue;
+}
 p{
 	line-height:20px;
 	margin:14px 0;
@@ -91,11 +94,12 @@ b{
 	font-size:12px;
 }
 .chinese-button-show{
-	position:fixed;
+	/*position:fixed;
 	bottom:0;
 	left:50%;
 	font-size:30px;
-	margin-left:-7px;
+	margin-left:-7px;*/
+	font-size:30px;
 	transform:rotate(-90deg);
 }
 .chinese-button-hide{
@@ -106,6 +110,25 @@ b{
 	transform:rotate(90deg);
 	margin-bottom:2px;
 	margin-left:-7px;
+}
+.bottom-container{
+	position:fixed;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:30px;
+	background-color:#fff;
+	border-top:solid 1px #e5e5e5;
+}
+.bottom-wrapper{
+	padding:0 20px;
+	height:100%;
+}
+.answer-button{
+	
+}
+.clear-button{
+	
 }
 .chinese{
 	border-top:solid 1px #e5e5e5;
@@ -118,4 +141,9 @@ b{
 	background:#fff;
 	overflow-y:auto;
 	padding:0 5px;
+}
+.audio{
+	position:fixed;
+	right:0;
+	top:0;
 }
